@@ -25,6 +25,7 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     public SecurityConfig(TokenProvider tokenProvider,
                           JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
