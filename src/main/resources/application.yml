@@ -1,13 +1,13 @@
 server:
   port: 7777
 
-## DB ?? ?? ? ?? ??? ?? ??
+## DB 연결 정보 및 파일 업로드 용량 제한
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@218.154.4.150:1521:xe
     username: C##IN4GO
-    password: INSA
+    password: IN4
   servlet:
     multipart:
       enabled: true
@@ -28,8 +28,8 @@ spring:
         '[format_sql]': true
 
 
-## HS512 ????? ??? ??? ??? 512bit, ? 64byte ??? secret key? ???? ??.
-## Secret ?? ?? ???? Base64 ? ???? ? ??
+## HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
+## Secret 값은 특정 문자열을 Base64 로 인코딩한 값 사용
 jwt:
   secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
 
@@ -38,18 +38,18 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 
-## ??? ??? ??? ??? ? ??? ?? ??
+## 이미지 저장할 위치와 응답할 때 이미지 주소 세팅
 image:
 
-  ## WebConfig? ??
+  ## WebConfig에 세팅
   add-resource-locations: classpath:/static/imgs/
   #  file:////imgs/
   add-resource-handler: /imgs/**
 
-  ## Service? ??
+  ## Service에 세팅
   image-dir: src/main/resources/static/imgs
   image-url: http://localhost:7777/imgs/
-#  http://3.39.37.238:7777/imgs/ -- aws???? ? ????? ??
+#  http://3.39.37.238:7777/imgs/ -- aws이용해서 내 인스턴스랑 연결
 
 # Logging Level
 logging:
@@ -59,7 +59,7 @@ logging:
 
 #  spring.mail.host=smtp.gmail.com
 #  spring.mail.port=587
-#  spring.mail.username=<??? ??? ??>
-#  spring.mail.password=<??? ??? ?? ????>
+#  spring.mail.username=<보내는 이메일 계정>
+#  spring.mail.password=<보내는 이메일 계정 비밀번호>
 #  spring.mail.properties.mail.smtp.auth=true
 #  spring.mail.properties.mail.smtp.starttls.enable=true
