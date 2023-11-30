@@ -29,7 +29,7 @@ spring:
 
 
 ## HS512 알고리즘을 사용할 것이기 때문에 512bit, 즉 64byte 이상의 secret key를 사용해야 한다.
-## Secret 값은 특정 문자열을 Base64 로 인코딩한 값 사용
+## Secret 값은 특정 문자열을 Base64 로 인코딩한 값 사용 (64비트만 넘으면 어떤 문자열도 상관없음)
 jwt:
   secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
 
