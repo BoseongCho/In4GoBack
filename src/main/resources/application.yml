@@ -1,0 +1,65 @@
+server:
+  port: 7777
+
+## DB ?? ?? ? ?? ??? ?? ??
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@218.154.4.150:1521:xe
+    username: C##IN4GO
+    password: INSA
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  web:
+    resources:
+      static-locations: classpath:/imgs/
+  #  file:////imgs/
+
+  ## jpa config
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    database: oracle
+    properties:
+      hibernate:
+        '[format_sql]': true
+
+
+## HS512 ????? ??? ??? ??? 512bit, ? 64byte ??? secret key? ???? ??.
+## Secret ?? ?? ???? Base64 ? ???? ? ??
+jwt:
+  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+## ??? ??? ??? ??? ? ??? ?? ??
+image:
+
+  ## WebConfig? ??
+  add-resource-locations: classpath:/static/imgs/
+  #  file:////imgs/
+  add-resource-handler: /imgs/**
+
+  ## Service? ??
+  image-dir: src/main/resources/static/imgs
+  image-url: http://localhost:7777/imgs/
+#  http://3.39.37.238:7777/imgs/ -- aws???? ? ????? ??
+
+# Logging Level
+logging:
+  level:
+    root: info
+
+
+#  spring.mail.host=smtp.gmail.com
+#  spring.mail.port=587
+#  spring.mail.username=<??? ??? ??>
+#  spring.mail.password=<??? ??? ?? ????>
+#  spring.mail.properties.mail.smtp.auth=true
+#  spring.mail.properties.mail.smtp.starttls.enable=true
