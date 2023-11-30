@@ -1,2 +1,4 @@
-package com.boseongcho.in4goback.member.dto;public class TokenDTO {
+package com.boseongcho.in4goback.member.dto;
+
+public class TokenDTO {
 }

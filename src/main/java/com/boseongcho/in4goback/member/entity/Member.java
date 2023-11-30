@@ -1,2 +1,4 @@
-package com.boseongcho.in4goback.member.entity;public class Member {
+package com.boseongcho.in4goback.member.entity;
+
+public class Member {
 }
