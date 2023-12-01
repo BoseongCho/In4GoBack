@@ -8,6 +8,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "AUTHORITY")
 public class Authority {
 

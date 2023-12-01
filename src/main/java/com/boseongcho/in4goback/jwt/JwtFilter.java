@@ -19,7 +19,7 @@ public class JwtFilter extends OncePerRequestFilter{
     private static final Logger log = LoggerFactory.getLogger(JwtFilter.class);
 
     public static final String AUTHORIZATION_HEADER = "Authorization"; // 사용자가 request header에 Authorization 속성으로 token을 던짐
-    public static final String BEARER_PREFIX = "Bearer";    // 사용자가 던지는 토큰 값만 파싱하기 위한 접두사 저장용 변수
+    public static final String BEARER_PREFIX = "Bearer";    // 사용자가 던지는 토큰 값만 파싱하기 위한   접두사 저장용 변수
                                                             // (접두사는 Bearer라는 표준으로 정의됨)
     private final TokenProvider tokenProvider;
 
