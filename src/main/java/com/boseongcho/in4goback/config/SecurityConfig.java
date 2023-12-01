@@ -37,9 +37,7 @@ public class SecurityConfig {
 
     /* 1. 암호화 처리를 위한 PasswordEncoder를 빈으로 설정 */
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    public BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
     /* 2. 시큐리티 설정을 무시할 정적 리소드 등록 */
     @Bean
