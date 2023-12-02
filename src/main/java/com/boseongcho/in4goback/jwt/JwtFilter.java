@@ -7,10 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /* OncePerRequestFilter : 사용자의 요청에 한번만 동작하는 필터 */
@@ -19,7 +20,7 @@ public class JwtFilter extends OncePerRequestFilter{
     private static final Logger log = LoggerFactory.getLogger(JwtFilter.class);
 
     public static final String AUTHORIZATION_HEADER = "Authorization"; // 사용자가 request header에 Authorization 속성으로 token을 던짐
-    public static final String BEARER_PREFIX = "Bearer";    // 사용자가 던지는 토큰 값만 파싱하기 위한   접두사 저장용 변수
+    public static final String BEARER_PREFIX = "Bearer";    // 사용자가 던지는 토큰 값만 파싱하기 위한 접두사 저장용 변수
                                                             // (접두사는 Bearer라는 표준으로 정의됨)
     private final TokenProvider tokenProvider;
 

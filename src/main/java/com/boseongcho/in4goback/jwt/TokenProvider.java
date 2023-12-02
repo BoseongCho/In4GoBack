@@ -25,10 +25,6 @@ import java.util.stream.Collectors;
 @Component
 public class TokenProvider {
 
-    /*
-    TokenProvider
-    JWTFilter 필터에서 사용하는 각각의 메소드들을 정의해놓고 사용할 수 있게 정의. */
-
     private static final Logger log = LoggerFactory.getLogger(TokenProvider.class);
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "Bearer"; // bearer를 사용하라고 명시되어있음.
@@ -38,8 +34,6 @@ public class TokenProvider {
 
     private final Key key; // java.security.Key
     public TokenProvider(@Value("${jwt.secret}") String secretKey, UserDetailsService userDetailsService) {
-        //property파일에서 값 불러옴. 여기서는 yml
-        //@Value("${bread.carpbread.name:붕어빵") //붕어빵 ->값을 읽어오지 못할 때 기본값.(optional)
         this.userDetailsService = userDetailsService;
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
@@ -48,8 +42,8 @@ public class TokenProvider {
     // 1번은 처음 로그인할 때 쓰이고, 인증이 필요한 페이지를 갈 때는 JwtFilter에서 요청이 걸러짐
     // JwtFilter에서 if문 내부에서 5번메소드인 validation체크를 호출하고, true값이 들어오면 4번메소드인 getAuthentication를 호출한다.
     // 2~3번 메소드는 4번 메소드를 보조함.
-
-
+    
+    
     /* 1. 토큰 생성 메소드 */
     public TokenDTO generateTokenDTO(Member member){
 
@@ -63,7 +57,7 @@ public class TokenProvider {
 
         /* 1-1. memCode를 "sub(토큰제목-subject)"라는 클레임으로 토큰에 추가 */
         Claims claims = Jwts.claims().setSubject(member.getMemCode());
-
+        
         /* 1-2. 회원의 권한들을 "auth"라는 클레임으로 토큰에 추가 */
         claims.put(AUTHORITIES_KEY, roles);
 
@@ -72,7 +66,7 @@ public class TokenProvider {
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
                 .setClaims(claims)
-
+                
                 /* 1-3. 토큰의 만료 기간을 DATE형으로 토큰에 추가("exp"라는 클레임으로 long 형으로 토큰에 추가 */
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS512) // HS512:암호화방식

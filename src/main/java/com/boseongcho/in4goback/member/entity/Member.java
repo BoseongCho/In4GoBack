@@ -1,7 +1,7 @@
 package com.boseongcho.in4goback.member.entity;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.util.List;
