@@ -30,13 +30,9 @@ public class Member {
     private String phone;
     @Column(name = "EMAIL")
     private String email;
-    @Column(name = "NATIONALITY")
-    private String nationality;
     @Column(name = "MEM_PIC")
     private String memPic;
-    @Column(name = "IS_MARRIED")
-    private char isMarried;
-    @Column(name = "IS_WORING")
+    @Column(name = "IS_WORKING")
     private char isWorking;  // 재직구분
     @Column(name = "ADDRESS")
     private String address;

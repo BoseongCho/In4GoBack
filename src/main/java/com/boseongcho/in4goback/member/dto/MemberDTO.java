@@ -22,7 +22,6 @@ public class MemberDTO implements UserDetails {
     private String phone;
     private String email;
     private String memPic;
-    private char isMarried;
     private char isWorking;  // 재직구분
 
 
