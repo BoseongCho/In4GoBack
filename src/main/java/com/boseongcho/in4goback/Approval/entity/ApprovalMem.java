@@ -22,6 +22,6 @@ public class ApprovalMem {
     private String memCode; // 사원번호 PK
     @Column(name = "MEM_NAME")
     private String memName;
-    @Column(name = "IS_WORING")
+    @Column(name = "IS_WORKING")
     private char isWorking;  // 재직구분
 }
