@@ -41,6 +41,6 @@ public class DutyApproval {
     private Date applicationDate;  // 신청일자
 
     @Column(name = "APPROVAL_DATE")
-    private Date approvalDate;  // 결재완료일자
+    private Date approvalDate;  // 결재완료일자 
 
 }

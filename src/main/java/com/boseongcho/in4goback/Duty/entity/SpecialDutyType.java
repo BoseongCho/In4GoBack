@@ -22,6 +22,6 @@ public class SpecialDutyType {
     private String specialDutyType  ; // 근휴유형명
 
     @Column(name ="SPECIAL_DUTY_PAY")
-    private int specialDutyPay; // 기본수당 (*무급=0)
+    private int specialDutyPay; // 기본수당 (*무급=0) 
 
 }

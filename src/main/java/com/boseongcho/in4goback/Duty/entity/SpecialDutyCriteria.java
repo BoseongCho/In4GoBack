@@ -30,6 +30,6 @@ public class SpecialDutyCriteria {
     private int memHasDays; // 기준(보유) 일수
 
     @Column(name = "PAY_MULTIPLIER")
-    private int payMultiplier; // 수당배율 (*직급별 배율)
+    private int payMultiplier; // 수당배율 (*직급별 배율) 
 
 }

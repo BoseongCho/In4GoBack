@@ -32,6 +32,6 @@ public class SpecialDuty {
     private Date doneDate; // 완료처리일자
 
     @Column(name = "IS_DONE")
-    private int isValid; // 근휴완료여부 : false=0, true=1, default=0
+    private int isValid; // 근휴완료여부 : false=0, true=1, default=0 
 
 }

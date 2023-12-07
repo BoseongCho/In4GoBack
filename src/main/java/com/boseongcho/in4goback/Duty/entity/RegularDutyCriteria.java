@@ -36,6 +36,6 @@ public class RegularDutyCriteria {
     private Date reportDate; //작성일
 
     @Column(name ="TITLE")
-    private String title; //제목
+    private String title; //제목 
 
 }

@@ -48,6 +48,6 @@ public class RegularDuty {
     private String applicationDate  ; // 변경점 작성일
 
     @Column(name ="IS_VALID")
-    private int isValid; // 유효여부 : false=0, true=1, default=1
+    private int isValid; // 유효여부 : false=0, true=1, default=1 
 
 }
