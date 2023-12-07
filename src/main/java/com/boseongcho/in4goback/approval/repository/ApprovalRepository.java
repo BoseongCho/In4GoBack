@@ -1,6 +1,6 @@
-package com.boseongcho.in4goback.Approval.repository;
+package com.boseongcho.in4goback.approval.repository;
 
-import com.boseongcho.in4goback.Approval.entity.Approval;
+import com.boseongcho.in4goback.approval.entity.Approval;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

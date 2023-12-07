@@ -1,8 +1,6 @@
-package com.boseongcho.in4goback.Approval.dto;
+package com.boseongcho.in4goback.approval.dto;
 
 import lombok.*;
-
-import java.util.List;
 
 
 @Getter
