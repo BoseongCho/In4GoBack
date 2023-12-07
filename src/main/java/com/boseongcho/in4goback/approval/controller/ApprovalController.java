@@ -1,11 +1,11 @@
-package com.boseongcho.in4goback.Approval.controller;
+package com.boseongcho.in4goback.approval.controller;
 
 
-import com.boseongcho.in4goback.Approval.dto.ApprovalDTO;
-import com.boseongcho.in4goback.Approval.paging.CriteriaAP;
-import com.boseongcho.in4goback.Approval.paging.PageDTOAP;
-import com.boseongcho.in4goback.Approval.paging.PagingResponseDTOAP;
-import com.boseongcho.in4goback.Approval.service.ApprovalService;
+import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.paging.CriteriaAP;
+import com.boseongcho.in4goback.approval.paging.PageDTOAP;
+import com.boseongcho.in4goback.approval.paging.PagingResponseDTOAP;
+import com.boseongcho.in4goback.approval.service.ApprovalService;
 import com.boseongcho.in4goback.common.ResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;

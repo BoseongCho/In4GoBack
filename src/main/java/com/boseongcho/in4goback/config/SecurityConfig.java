@@ -101,7 +101,7 @@ public class SecurityConfig {
         //List.of는 결과값이 불변객체
         //Arrays.asList는 가변객체
 //        configuration.setAllowedOrigins(Arrays.asList("http://43.201.169.51:7777")); //이 origin을 허용하겠다/
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000","http://localhost:3000/", "http://localhost:3001")); //이 origin을
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:3001")); //이 origin을
 
         http://localhost:3000
         // 허용하겠다/

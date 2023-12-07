@@ -5,9 +5,10 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@218.154.4.150:1521:xe
-    username: C##IN4GO
-    password: IN4
+#    url: jdbc:oracle:thin:@218.154.4.150:1521:xe
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: C##INSA
+    password: INSA
   servlet:
     multipart:
       enabled: true

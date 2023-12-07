@@ -1,11 +1,11 @@
-package com.boseongcho.in4goback.Approval.service;
+package com.boseongcho.in4goback.approval.service;
 
 
-import com.boseongcho.in4goback.Approval.dto.ApprovalDTO;
-import com.boseongcho.in4goback.Approval.entity.Approval;
-import com.boseongcho.in4goback.Approval.paging.CriteriaAP;
-import com.boseongcho.in4goback.Approval.repository.ApprovalRepository;
-import com.boseongcho.in4goback.Approval.repository.InsertApprovalRepository;
+import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.entity.Approval;
+import com.boseongcho.in4goback.approval.paging.CriteriaAP;
+import com.boseongcho.in4goback.approval.repository.ApprovalRepository;
+import com.boseongcho.in4goback.approval.repository.InsertApprovalRepository;
 import com.boseongcho.in4goback.member.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
