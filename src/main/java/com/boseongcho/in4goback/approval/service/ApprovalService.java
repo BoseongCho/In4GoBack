@@ -2,7 +2,9 @@ package com.boseongcho.in4goback.approval.service;
 
 
 import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.dto.ApprovalMemDTO;
 import com.boseongcho.in4goback.approval.entity.Approval;
+import com.boseongcho.in4goback.approval.entity.ApprovalMem;
 import com.boseongcho.in4goback.approval.paging.CriteriaAP;
 import com.boseongcho.in4goback.approval.repository.ApprovalRepository;
 import com.boseongcho.in4goback.approval.repository.InsertApprovalRepository;
@@ -55,5 +57,20 @@ public class ApprovalService {
         List<Approval> approvalList = (List<Approval>) result.getContent();
 
         return approvalList.stream().map(approval -> modelMapper.map(approval, ApprovalDTO.class)).collect(Collectors.toList());
+    }
+
+    public Object getSearchInfoAPI(String nameOrPosition, String inputValue) {
+        log.info("[ApprovalService] getSearchInfoAPI Start =============== ");
+
+        List<ApprovalMem> foundMembers = null;
+        if(nameOrPosition.equals("이름")){
+            foundMembers = memberRepository.getSearchInfoByName(inputValue);
+        }
+//        else if (nameOrPosition.equals("직급")) {
+//            foundMembers = memberRepository.getSearchInfoByPosition(inputValue);
+//        }
+
+
+        return foundMembers.stream().map(foundMember -> modelMapper.map(foundMember, ApprovalMemDTO.class)).collect(Collectors.toList());
     }
 }

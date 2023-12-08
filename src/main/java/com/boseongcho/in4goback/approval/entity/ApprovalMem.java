@@ -24,4 +24,5 @@ public class ApprovalMem {
     private String memName;
     @Column(name = "IS_WORKING")
     private char isWorking;  // 재직구분
+
 }

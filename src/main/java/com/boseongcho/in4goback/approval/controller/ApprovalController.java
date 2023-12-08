@@ -39,4 +39,10 @@ public class ApprovalController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTOAP));
     }
+
+    @Operation(summary = "결재대상 정보 조회", description = "업무 상신 결재대상 정보 조회", tags = { "ApprovalController" })
+    @GetMapping("/approval/searchInfo")
+    public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue)));
+    }
 }
