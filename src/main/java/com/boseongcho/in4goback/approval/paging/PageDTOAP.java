@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.Approval.paging;
+package com.boseongcho.in4goback.approval.paging;
 
 import lombok.Getter;
 import lombok.Setter;

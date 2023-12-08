@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.Approval.entity;
+package com.boseongcho.in4goback.approval.entity;
 
 
 import lombok.*;

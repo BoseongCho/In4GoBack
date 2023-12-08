@@ -1,11 +1,11 @@
-package com.boseongcho.in4goback.Approval.controller;
+package com.boseongcho.in4goback.approval.controller;
 
 
-import com.boseongcho.in4goback.Approval.dto.ApprovalDTO;
-import com.boseongcho.in4goback.Approval.paging.CriteriaAP;
-import com.boseongcho.in4goback.Approval.paging.PageDTOAP;
-import com.boseongcho.in4goback.Approval.paging.PagingResponseDTOAP;
-import com.boseongcho.in4goback.Approval.service.ApprovalService;
+import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.paging.CriteriaAP;
+import com.boseongcho.in4goback.approval.paging.PageDTOAP;
+import com.boseongcho.in4goback.approval.paging.PagingResponseDTOAP;
+import com.boseongcho.in4goback.approval.service.ApprovalService;
 import com.boseongcho.in4goback.common.ResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
@@ -38,5 +38,11 @@ public class ApprovalController {
         pagingResponseDTOAP.setPageInfo(new PageDTOAP(total, cri));
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTOAP));
+    }
+
+    @Operation(summary = "결재대상 정보 조회", description = "업무 상신 결재대상 정보 조회", tags = { "ApprovalController" })
+    @GetMapping("/approval/searchInfo")
+    public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue)));
     }
 }

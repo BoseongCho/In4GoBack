@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.Approval.entity;
+package com.boseongcho.in4goback.approval.entity;
 
 
 import lombok.*;
@@ -24,4 +24,5 @@ public class ApprovalMem {
     private String memName;
     @Column(name = "IS_WORKING")
     private char isWorking;  // 재직구분
+
 }
