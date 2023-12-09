@@ -1,6 +1,8 @@
 package com.boseongcho.in4goback.member.entity;
 
 import javax.persistence.*;
+
+import com.boseongcho.in4goback.deptandteam.entity.Department;
 import lombok.*;
 
 @Getter
@@ -17,9 +19,9 @@ public class Authority {
     @Column(name = "AUTH_NUMBER")
     private int authNumber;   // 시퀀스 / 경우의 수 14개
 
-//    @ManyToOne
-//    @JoinColumn(name = "DEPARTMENT_CODE")
-//    private Department departmentCode;
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_CODE")
+    private Department departmentCode;
 
     @Column(name = "AUTH_NAME")
     private String authName; //권한 명

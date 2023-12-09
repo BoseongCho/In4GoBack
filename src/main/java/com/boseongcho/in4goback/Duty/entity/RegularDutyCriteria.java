@@ -1,6 +1,6 @@
 package com.boseongcho.in4goback.Duty.entity;
 
-import com.boseongcho.in4goback.Approval.entity.ApprovalMem;
+import com.boseongcho.in4goback.approval.entity.ApprovalMem;
 import lombok.*;
 
 import javax.persistence.*;

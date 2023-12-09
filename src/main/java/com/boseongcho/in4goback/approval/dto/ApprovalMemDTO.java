@@ -1,6 +1,8 @@
 package com.boseongcho.in4goback.approval.dto;
 
 
+import com.boseongcho.in4goback.deptandteam.dto.DepartmentDTO;
+import com.boseongcho.in4goback.position.dto.PositionDTO;
 import lombok.*;
 
 @Getter
@@ -14,6 +16,6 @@ public class ApprovalMemDTO {
     private String memName;
 
     // FK
-//    private DepartmentDTO departmentCode; // 부서코드
-//    private PositionDTO positionCode; // 직급코드
+    private DepartmentDTO departmentCode; // 부서코드
+    private PositionDTO positionCode; // 직급코드
 }

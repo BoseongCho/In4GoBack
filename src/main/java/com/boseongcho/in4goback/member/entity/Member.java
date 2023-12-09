@@ -2,6 +2,10 @@ package com.boseongcho.in4goback.member.entity;
 
 
 import javax.persistence.*;
+
+import com.boseongcho.in4goback.deptandteam.entity.Department;
+import com.boseongcho.in4goback.deptandteam.entity.Team;
+import com.boseongcho.in4goback.position.entity.Position;
 import lombok.*;
 
 import java.util.List;
@@ -36,6 +40,19 @@ public class Member {
     private char isWorking;  // 재직구분
     @Column(name = "ADDRESS")
     private String address;
+
+    // FK
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_CODE")
+    private Department departmentCode; // 부서코드
+
+    @OneToOne
+    @JoinColumn(name = "TEAM_CODE")
+    private Team teamCode; // 팀코드
+
+    @ManyToOne
+    @JoinColumn(name = "POSITION_CODE")
+    private Position positionCode; // 직급코드
 
     @OneToMany
     @JoinColumn(name = "MEM_CODE")

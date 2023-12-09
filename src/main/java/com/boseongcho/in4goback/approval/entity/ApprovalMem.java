@@ -1,12 +1,11 @@
 package com.boseongcho.in4goback.approval.entity;
 
 
+import com.boseongcho.in4goback.deptandteam.entity.Department;
+import com.boseongcho.in4goback.position.entity.Position;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -15,6 +14,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "MEMBER")
+//@NamedEntityGraph(name = "ApprovalMem.fetchAll", attributeNodes = {
+//        @NamedAttributeNode("departmentCode"),
+//        @NamedAttributeNode("positionCode"),
+//})
 public class ApprovalMem {
 
     @Id
@@ -24,5 +27,13 @@ public class ApprovalMem {
     private String memName;
     @Column(name = "IS_WORKING")
     private char isWorking;  // 재직구분
+
+    @ManyToOne
+    @JoinColumn(name = "DEPARTMENT_CODE")
+    private Department departmentCode; // 부서코드
+
+    @ManyToOne
+    @JoinColumn(name = "POSITION_CODE")
+    private Position positionCode; // 직급코드
 
 }
