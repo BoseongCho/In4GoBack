@@ -1,5 +1,8 @@
 package com.boseongcho.in4goback.member.dto;
 
+import com.boseongcho.in4goback.deptandteam.dto.DepartmentDTO;
+import com.boseongcho.in4goback.deptandteam.dto.TeamDTO;
+import com.boseongcho.in4goback.position.dto.PositionDTO;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +27,11 @@ public class MemberDTO implements UserDetails {
     private String memPic;
     private char isWorking;  // 재직구분
 
+
+    // FK
+    private DepartmentDTO departmentCode; // 부서코드
+    private TeamDTO teamCode; // 팀코드
+    private PositionDTO positionCode; // 직급코드
 
     // 다 대 다 -> 일 대 다  + 일 대 다
     private List<MemAuthorityDTO> memAuthorityList; // 권한목록
