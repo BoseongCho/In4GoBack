@@ -2,6 +2,8 @@ package com.boseongcho.in4goback.approval.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,13 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
-@Table(name="APPROVER")
+@Table(name ="APPROVER")
+@DynamicInsert
+@DynamicUpdate
 public class Approver {
 
     @Id

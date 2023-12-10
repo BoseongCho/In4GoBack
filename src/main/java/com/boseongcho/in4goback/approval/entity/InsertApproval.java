@@ -1,13 +1,13 @@
 package com.boseongcho.in4goback.approval.entity;
 
 
+import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +21,11 @@ public class InsertApproval {
 
     @Id
     @Column(name = "DOC_CODE")
-//    시퀀스 코드 작성 필
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
+    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+            parameters = {
+                @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
+            })
     private String docCode;
 
     @Column(name = "MEM_CODE")
@@ -33,6 +37,16 @@ public class InsertApproval {
     @Column(name = "CONTENT")
     private String content; //내용
 
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<Approver> approverList; // 결재자 리스트
+
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<Referee> refereeList; // 참조인 리스트
+
     @Column(name ="TITLE")
     private String title; //제목
+
+
 }

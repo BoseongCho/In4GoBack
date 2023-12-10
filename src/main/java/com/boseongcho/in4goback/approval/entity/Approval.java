@@ -1,9 +1,12 @@
 package com.boseongcho.in4goback.approval.entity;
 
+import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @ToString
@@ -11,11 +14,20 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@NamedEntityGraph(name = "Approval.fetchAll", attributeNodes = {
+        @NamedAttributeNode("approverList"),
+        @NamedAttributeNode("approvalMem"),
+//        @NamedAttributeNode("bookmark"),
+})
 public class Approval {
 
     @Id
     @Column(name = "DOC_CODE")
-    //시퀀스 추가 구문 추가 필
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
+    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
+            })
     private String docCode;
 
     @OneToOne
@@ -34,8 +46,14 @@ public class Approval {
     @Column(name ="reportDate")
     private Date reportDate; //작성일
 
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<Approver> approverList; // 결재자 리스트
+
+
     @Column(name ="TITLE")
     private String title; //제목
+
 
     /*
     상신함 - memCode = 나
