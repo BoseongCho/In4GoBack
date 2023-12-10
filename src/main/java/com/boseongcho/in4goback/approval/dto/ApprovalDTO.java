@@ -4,6 +4,7 @@ package com.boseongcho.in4goback.approval.dto;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,5 +22,6 @@ public class ApprovalDTO {
     private Date reportDate; //작성일
 
     private String title; //제목
+    private List<DocAttachmentDTO> docAttachmentList; // 결재_첨부파일
 
 }

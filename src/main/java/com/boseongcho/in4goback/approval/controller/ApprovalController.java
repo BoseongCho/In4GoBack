@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -50,5 +51,13 @@ public class ApprovalController {
         System.out.println("insertApprovalDTO = " + insertApprovalDTO);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제문서 상신 완료", approvalService.insertApproval(insertApprovalDTO)));
+    }
+
+    @Operation(summary = "결재 문서 첨부파일 추가", description = "결재 문서 첨부파일 추가", tags = { "ApprovalController" })
+    @PostMapping(value = "/approval/insertDoc")
+    public ResponseEntity<ResponseDTO> insertApprovalDoc(@RequestParam("file")List<MultipartFile> docAttachments
+            , @RequestParam String docCode){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제문서 상신 완료", approvalService.insertApprovalDoc(docAttachments, docCode)));
     }
 }

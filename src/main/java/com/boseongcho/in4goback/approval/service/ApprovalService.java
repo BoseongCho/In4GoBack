@@ -1,14 +1,15 @@
 package com.boseongcho.in4goback.approval.service;
 
-
 import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
 import com.boseongcho.in4goback.approval.dto.ApprovalMemDTO;
 import com.boseongcho.in4goback.approval.dto.InsertApprovalDTO;
 import com.boseongcho.in4goback.approval.entity.*;
 import com.boseongcho.in4goback.approval.paging.CriteriaAP;
 import com.boseongcho.in4goback.approval.repository.ApprovalRepository;
+import com.boseongcho.in4goback.approval.repository.DocAttachmentRepository;
 import com.boseongcho.in4goback.approval.repository.InsertApprovalRepository;
 import com.boseongcho.in4goback.member.repository.MemberRepository;
+import com.boseongcho.in4goback.util.FileUploadUtils;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -18,12 +19,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -36,6 +41,7 @@ public class ApprovalService {
     private final MemberRepository memberRepository;
     private final ModelMapper modelMapper;
     private final InsertApprovalRepository insertApprovalRepository;
+    private final DocAttachmentRepository docAttachmentRepository;
 
     @PersistenceContext
     EntityManager em;
@@ -130,5 +136,41 @@ public class ApprovalService {
         }
         log.info("[ApprovalService] insertApproval End ==============================");
         return (result > 0) ? docCode : "실패";
+    }
+
+    @Transactional
+    public Object insertApprovalDoc(List<MultipartFile> docAttachments, String docCode) {
+
+        System.out.println("Service ====== insertApprovalDoc = " + docAttachments);
+        List<DocAttachment> docAttachmentList = new ArrayList<>();
+        String DOC_URL = "src/main/resources/static/attachments";
+        String savedName = null; // 실제 저장될 이름(+. 확장자 포함)
+        int result = 0;
+
+
+        try {
+            for (MultipartFile file : docAttachments) {
+
+                String fileName = UUID.randomUUID().toString().replace("-", "");
+                savedName = FileUploadUtils.saveFile(DOC_URL, fileName, file);
+                savedName = "/attachments/" + savedName;
+                System.out.println("savedName = " + savedName);
+
+                DocAttachment docAttachment = new DocAttachment();
+                docAttachment.setUrl(savedName); // 저장경로 + 저장이름(+.확장자)
+                docAttachment.setDocCode(docCode);
+                docAttachment.setFileName(file.getOriginalFilename()); // 찐이름
+
+                docAttachmentList.add(docAttachment);
+            }
+            System.out.println("docAttachmentList = " + docAttachmentList);
+            docAttachmentRepository.saveAll(docAttachmentList);
+
+            result = 1;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return (result > 0) ? "등록성공" : "등록 실패";
     }
 }
