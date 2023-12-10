@@ -84,52 +84,51 @@ public class ApprovalService {
         return foundMembers.stream().map(foundMember -> modelMapper.map(foundMember, ApprovalMemDTO.class)).collect(Collectors.toList());
     }
 
-//    @Transactional
-//@Transactional
-public Object insertApproval(InsertApprovalDTO insertApprovalDTO) {
+    @Transactional
+    public Object insertApproval(InsertApprovalDTO insertApprovalDTO) {
 
-    System.out.println("Service ====== insertApprovalDTO = " + insertApprovalDTO);
+        System.out.println("Service ====== insertApprovalDTO = " + insertApprovalDTO);
 
-    int result = 0;
-    String docCode = "";
+        int result = 0;
+        String docCode = "";
 
-//    try {
+        try {
 
-        InsertApproval insertApproval = modelMapper.map(insertApprovalDTO, InsertApproval.class);
-        List<Approver> approverList = insertApproval.getApproverList();
-        List<Referee> refereeList = insertApproval.getRefereeList();
-        insertApproval.setApproverList(null);
-        insertApproval.setRefereeList(null);
+            InsertApproval insertApproval = modelMapper.map(insertApprovalDTO, InsertApproval.class);
+            List<Approver> approverList = insertApproval.getApproverList();
+            List<Referee> refereeList = insertApproval.getRefereeList();
+            insertApproval.setApproverList(null);
+            insertApproval.setRefereeList(null);
 
-        insertApprovalRepository.save(insertApproval);
+            insertApprovalRepository.save(insertApproval);
 
-        if (approverList != null) {
-            for (int i = 0; i < approverList.size(); i++) {
-                Approver approver = approverList.get(i);
-                String sql = "INSERT INTO APPROVER (DOC_CODE, MEM_CODE) VALUES (:value1, :value2)";
-                Query nativeQuery = em.createNativeQuery(sql);
-                nativeQuery.setParameter("value1", insertApproval.getDocCode());
-                nativeQuery.setParameter("value2", approver.getMemCode());
-                nativeQuery.executeUpdate();
+            if (approverList != null) {
+                for (int i = 0; i < approverList.size(); i++) {
+                    Approver approver = approverList.get(i);
+                    String sql = "INSERT INTO APPROVER (DOC_CODE, MEM_CODE) VALUES (:value1, :value2)";
+                    Query nativeQuery = em.createNativeQuery(sql);
+                    nativeQuery.setParameter("value1", insertApproval.getDocCode());
+                    nativeQuery.setParameter("value2", approver.getMemCode());
+                    nativeQuery.executeUpdate();
+                }
             }
-        }
 
-        if (refereeList != null) {
-            for (int i = 0; i < refereeList.size(); i++) {
-                Referee referee = refereeList.get(i);
-                String sql = "INSERT INTO REFEREE (DOC_CODE, MEM_CODE) VALUES (:value1, :value2)";
-                Query nativeQuery = em.createNativeQuery(sql);
-                nativeQuery.setParameter("value1", insertApproval.getDocCode());
-                nativeQuery.setParameter("value2", referee.getMemCode());
-                nativeQuery.executeUpdate();
+            if (refereeList != null) {
+                for (int i = 0; i < refereeList.size(); i++) {
+                    Referee referee = refereeList.get(i);
+                    String sql = "INSERT INTO REFEREE (DOC_CODE, MEM_CODE) VALUES (:value1, :value2)";
+                    Query nativeQuery = em.createNativeQuery(sql);
+                    nativeQuery.setParameter("value1", insertApproval.getDocCode());
+                    nativeQuery.setParameter("value2", referee.getMemCode());
+                    nativeQuery.executeUpdate();
+                }
             }
+            result = 1;
+            docCode = insertApproval.getDocCode();
+        } catch (Exception e) {
+            log.info("[Approval insert] Failed!!");
         }
-        result = 1;
-        docCode = insertApproval.getDocCode();
-//    } catch (Exception e) {
-//        log.info("[Approval insert] Failed!!");
-//    }
-    log.info("[ApprovalService] insertApproval End ==============================");
-    return (result > 0) ? docCode : "실패";
-}
+        log.info("[ApprovalService] insertApproval End ==============================");
+        return (result > 0) ? docCode : "실패";
+    }
 }

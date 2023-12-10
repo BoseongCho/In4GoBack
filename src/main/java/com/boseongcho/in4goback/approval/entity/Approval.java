@@ -1,6 +1,8 @@
 package com.boseongcho.in4goback.approval.entity;
 
+import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +23,11 @@ public class Approval {
 
     @Id
     @Column(name = "DOC_CODE")
-    //시퀀스 추가 구문 추가 필
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
+    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
+            })
     private String docCode;
 
     @OneToOne

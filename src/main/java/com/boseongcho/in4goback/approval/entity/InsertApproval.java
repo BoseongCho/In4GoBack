@@ -1,8 +1,10 @@
 package com.boseongcho.in4goback.approval.entity;
 
 
+import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,6 +21,11 @@ public class InsertApproval {
 
     @Id
     @Column(name = "DOC_CODE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
+    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+            parameters = {
+                @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
+            })
     private String docCode;
 
     @Column(name = "MEM_CODE")
