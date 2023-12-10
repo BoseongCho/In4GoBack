@@ -23,11 +23,11 @@ public class Approval {
 
     @Id
     @Column(name = "DOC_CODE")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
-    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
-            })
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_DOCUMENT_CODE")
+//    @GenericGenerator(name = "SEQ_DOCUMENT_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+//            parameters = {
+//                    @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "DOC_")
+//            })
     private String docCode;
 
     @OneToOne
@@ -54,6 +54,9 @@ public class Approval {
     @Column(name ="TITLE")
     private String title; //제목
 
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<DocAttachment> docAttachmentList; // 결재_첨부파일
 
     /*
     상신함 - memCode = 나
