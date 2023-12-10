@@ -10,6 +10,6 @@ import lombok.*;
 @ToString
 public class RefereeDTO {
 
-    private String memCode; //PK
-    private String docCode; //FK
+    private String memCode;
+    private String docCode;
 }

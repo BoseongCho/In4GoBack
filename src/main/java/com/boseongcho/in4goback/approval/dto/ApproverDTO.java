@@ -7,9 +7,9 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ApproverDTO {
 
     private String docCode; //  문서번호

@@ -16,7 +16,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("SELECT DISTINCT m FROM ApprovalMem m WHERE m.memName LIKE concat('%', concat(:inputValue, '%'))")
     List<ApprovalMem> getSearchInfoByName(String inputValue);
 
-    @EntityGraph(value = "ArppvoalMem.fetchAll", type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT DISTINCT m FROM ApprovalMem m WHERE m.positionCode.positionName LIKE concat('%', concat(:inputValue, '%'))")
+    @EntityGraph(value = "ApprovalMem.fetchAll", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT m FROM ApprovalMem m WHERE m.positionCode.positionName LIKE concat('%', concat(:inputValue, '%'))")
     List<ApprovalMem> getSearchInfoByPosition(String inputValue);
 }

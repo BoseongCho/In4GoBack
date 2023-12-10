@@ -14,10 +14,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "MEMBER")
-//@NamedEntityGraph(name = "ApprovalMem.fetchAll", attributeNodes = {
-//        @NamedAttributeNode("departmentCode"),
-//        @NamedAttributeNode("positionCode"),
-//})
+@NamedEntityGraph(name = "ApprovalMem.fetchAll", attributeNodes = {
+        @NamedAttributeNode("departmentCode"),
+        @NamedAttributeNode("positionCode"),
+})
 public class ApprovalMem {
 
     @Id

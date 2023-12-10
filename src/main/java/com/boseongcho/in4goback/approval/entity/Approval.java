@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @ToString
@@ -11,6 +12,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@NamedEntityGraph(name = "Approval.fetchAll", attributeNodes = {
+        @NamedAttributeNode("approverList"),
+        @NamedAttributeNode("approvalMem"),
+//        @NamedAttributeNode("bookmark"),
+})
 public class Approval {
 
     @Id
@@ -34,8 +40,14 @@ public class Approval {
     @Column(name ="reportDate")
     private Date reportDate; //작성일
 
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<Approver> approverList; // 결재자 리스트
+
+
     @Column(name ="TITLE")
     private String title; //제목
+
 
     /*
     상신함 - memCode = 나

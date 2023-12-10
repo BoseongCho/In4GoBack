@@ -15,19 +15,18 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Entity
+@Entity(name = "Referee")
 @Table(name ="REFEREE")
 @DynamicInsert
 @DynamicUpdate
 public class Referee {
 
     @Id
-    @Column(name ="MEM_CODE")
-    private String memCode; // 참조인 memCode
-
     @Column(name ="DOC_CODE")
     private String docCode;
 
+    @Column(name ="MEM_CODE")
+    private String memCode; // 참조인 memCode
 
 }
 

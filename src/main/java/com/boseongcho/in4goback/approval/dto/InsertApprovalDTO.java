@@ -2,6 +2,8 @@ package com.boseongcho.in4goback.approval.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -16,6 +18,6 @@ public class InsertApprovalDTO {
     private String title; //제목
     private String content; //내용
 
-//    private List<ApproverDTO> approverList; // 결재자 리스트
-//    private List<RefereeDTO> refereeList; // 참조인 리스트
+    private List<ApproverDTO> approverList; // 결재자 리스트
+    private List<RefereeDTO> refereeList; // 참조인 리스트
 }

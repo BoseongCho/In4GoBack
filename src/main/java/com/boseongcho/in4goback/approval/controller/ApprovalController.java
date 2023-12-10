@@ -2,6 +2,7 @@ package com.boseongcho.in4goback.approval.controller;
 
 
 import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.dto.InsertApprovalDTO;
 import com.boseongcho.in4goback.approval.paging.CriteriaAP;
 import com.boseongcho.in4goback.approval.paging.PageDTOAP;
 import com.boseongcho.in4goback.approval.paging.PagingResponseDTOAP;
@@ -11,10 +12,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +42,13 @@ public class ApprovalController {
     @GetMapping("/approval/searchInfo")
     public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue)));
+    }
+
+    @Operation(summary = "결재 문서 상신", description = "결재 문서 상신", tags = { "ApprovalController" })
+    @PostMapping(value = "/approval/insert")
+    public ResponseEntity<Object> insertApproval(@RequestBody InsertApprovalDTO insertApprovalDTO){
+        System.out.println("insertApprovalDTO = " + insertApprovalDTO);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제문서 상신 완료", approvalService.insertApproval(insertApprovalDTO)));
     }
 }
