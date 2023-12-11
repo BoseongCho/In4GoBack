@@ -60,4 +60,11 @@ public class ApprovalController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제문서 상신 완료", approvalService.insertApprovalDoc(docAttachments, docCode)));
     }
+
+    @Operation(summary = "상신함 날짜로 검색", description = "상신함 날짜로 검색", tags = { "ApprovalController" })
+    @GetMapping("/approval/search")
+    public ResponseEntity<ResponseDTO> getSearchApproval(@RequestParam String memCode, @RequestParam String startDate, @RequestParam String endDate) {
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchApproval(memCode, startDate, endDate)));
+    }
 }

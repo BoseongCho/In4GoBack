@@ -173,4 +173,31 @@ public class ApprovalService {
 
         return (result > 0) ? "등록성공" : "등록 실패";
     }
+
+//    public String changeSearchDate(String inputDate){
+//        /* 입력 날짜 + 1을 위한 메소드 */
+//        String YYMMDD = inputDate.substring(2);
+//
+//        String day = YYMMDD.substring(6);
+//        String YYDD = YYMMDD.substring(0,6);  // YY/MM/ 까지
+//        int intDay = Integer.parseInt(day) + 1;
+//        if (intDay < 10) {
+//            day = "0" + intDay;
+//        } else {
+//            day = "" + intDay;
+//        }
+//
+//        String date = (YYDD += day); // YY/MM/DD
+//        System.out.println("수정된 endDate ========== " + date);
+//
+//        return date;
+//    }
+
+    public Object getSearchApproval(String memCode, String startDate, String endDate) {
+        log.info("[ApprovalService] getSearchApproval Start =============== ");
+
+        List<Approval> approvalList = approvalRepository.getSearchApproval(memCode, startDate, endDate);
+
+        return approvalList.stream().map(approval -> modelMapper.map(approval, ApprovalDTO.class)).collect(Collectors.toList());
+    }
 }
