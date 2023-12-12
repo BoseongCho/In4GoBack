@@ -22,6 +22,7 @@ public class ApprovalDTO {
     private Date reportDate; //작성일
 
     private String title; //제목
+    private BookmarkDTO bookmark; //
     private List<DocAttachmentDTO> docAttachmentList; // 결재_첨부파일
 
 }
