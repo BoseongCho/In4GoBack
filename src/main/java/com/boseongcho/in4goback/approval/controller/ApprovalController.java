@@ -2,6 +2,7 @@ package com.boseongcho.in4goback.approval.controller;
 
 
 import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
+import com.boseongcho.in4goback.approval.dto.BookmarkDTO;
 import com.boseongcho.in4goback.approval.dto.InsertApprovalDTO;
 import com.boseongcho.in4goback.approval.paging.CriteriaAP;
 import com.boseongcho.in4goback.approval.paging.PageDTOAP;
@@ -66,5 +67,21 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> getSearchApproval(@RequestParam String memCode, @RequestParam String startDate, @RequestParam String endDate) {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchApproval(memCode, startDate, endDate)));
+    }
+
+    @Operation(summary = "결재 북마크 등록", description = "결재 북마크 등록", tags = { "ApprovalController" })
+    @PostMapping("/approval/bookmark/post")
+    public ResponseEntity<ResponseDTO> postApprovalBookmark(@RequestBody BookmarkDTO bookmarkDTO){
+        System.out.println("bookmarkDTO = " + bookmarkDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "등록 성공", approvalService.postApprovalBookmark(bookmarkDTO)));
+    }
+
+    @Operation(summary = "결재 북마크 삭제", description = "결재 북마크 삭제", tags = { "ApprovalController" })
+    @DeleteMapping("/approval/bookmark/delete")
+    public ResponseEntity<ResponseDTO> deleteApprovalBookmark(@RequestBody BookmarkDTO bookmarkDTO){
+
+        System.out.println("Delete bookmarkDTO = " + bookmarkDTO);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "삭제 성공", approvalService.deleteApprovalBookmark(bookmarkDTO)));
     }
 }

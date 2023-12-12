@@ -54,6 +54,10 @@ public class Approval {
     @Column(name ="TITLE")
     private String title; //제목
 
+    @OneToOne
+    @JoinColumn(name = "DOC_CODE")
+    private Bookmark bookmark; //
+
     @OneToMany
     @JoinColumn(name = "DOC_CODE")
     private List<DocAttachment> docAttachmentList; // 결재_첨부파일

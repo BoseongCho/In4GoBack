@@ -2,10 +2,12 @@ package com.boseongcho.in4goback.approval.service;
 
 import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
 import com.boseongcho.in4goback.approval.dto.ApprovalMemDTO;
+import com.boseongcho.in4goback.approval.dto.BookmarkDTO;
 import com.boseongcho.in4goback.approval.dto.InsertApprovalDTO;
 import com.boseongcho.in4goback.approval.entity.*;
 import com.boseongcho.in4goback.approval.paging.CriteriaAP;
 import com.boseongcho.in4goback.approval.repository.ApprovalRepository;
+import com.boseongcho.in4goback.approval.repository.BookmarkRepository;
 import com.boseongcho.in4goback.approval.repository.DocAttachmentRepository;
 import com.boseongcho.in4goback.approval.repository.InsertApprovalRepository;
 import com.boseongcho.in4goback.member.repository.MemberRepository;
@@ -42,6 +44,7 @@ public class ApprovalService {
     private final ModelMapper modelMapper;
     private final InsertApprovalRepository insertApprovalRepository;
     private final DocAttachmentRepository docAttachmentRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     @PersistenceContext
     EntityManager em;
@@ -199,5 +202,45 @@ public class ApprovalService {
         List<Approval> approvalList = approvalRepository.getSearchApproval(memCode, startDate, endDate);
 
         return approvalList.stream().map(approval -> modelMapper.map(approval, ApprovalDTO.class)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Object postApprovalBookmark(BookmarkDTO bookmarkDTO) {
+        log.info("[ApprovalService] postApprovalBookmark Start ============================= ");
+
+        int result = 0;
+
+        try {
+
+            Bookmark bookmark = modelMapper.map(bookmarkDTO, Bookmark.class);
+
+            bookmarkRepository.save(bookmark);
+
+            result = 1;
+        } catch (Exception e) {
+            log.info("[bookmark insert] Failed!!");
+        }
+
+        log.info("[ApprovalService] postApprovalBookmark End ==============================");
+
+        return (result > 0) ? "북마크 등록" : "북마크 등록 실패";
+    }
+
+    public Object deleteApprovalBookmark(BookmarkDTO bookmarkDTO) {
+
+        int result = 0;
+
+        try {
+            Bookmark bookmark = modelMapper.map(bookmarkDTO, Bookmark.class);
+
+            bookmarkRepository.delete(bookmark);
+
+            result = 1;
+        } catch (Exception e) {
+            log.info("[bookmark delete ] Failed!!");
+        }
+        log.info("[ApprovalService] postApprovalBookmark End ==============================");
+
+        return (result > 0) ? "북마크 삭제" : "북마크 삭제 실패";
     }
 }
