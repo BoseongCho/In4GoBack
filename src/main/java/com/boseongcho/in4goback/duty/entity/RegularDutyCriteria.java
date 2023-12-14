@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.Duty.entity;
+package com.boseongcho.in4goback.duty.entity;
 
 import com.boseongcho.in4goback.approval.entity.ApprovalMem;
 import lombok.*;

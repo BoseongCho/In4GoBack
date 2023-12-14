@@ -1,9 +1,7 @@
-package com.boseongcho.in4goback.Duty.controller;
+package com.boseongcho.in4goback.duty.controller;
 
-import com.boseongcho.in4goback.Duty.service.DutyService;
-import com.boseongcho.in4goback.approval.service.ApprovalService;
+import com.boseongcho.in4goback.duty.service.DutyService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class DutyController {
 
     private final DutyService dutyService;
-
-
 
 
 
