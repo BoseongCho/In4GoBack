@@ -1,5 +1,6 @@
 package com.boseongcho.in4goback.approval.entity;
 
+import com.boseongcho.in4goback.approval.dto.RefereeDTO;
 import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -49,6 +50,13 @@ public class Approval {
     @OneToMany
     @JoinColumn(name = "DOC_CODE")
     private List<Approver> approverList; // 결재자 리스트
+
+    @OneToMany
+    @JoinColumn(name = "DOC_CODE")
+    private List<Referee> refereeList; // 참조인 리스트
+
+    @Transient
+    private String typeToMe; // 상신/결재/참조
 
 
     @Column(name ="TITLE")

@@ -25,22 +25,23 @@ public class ApprovalController {
 
     private final ApprovalService approvalService;
 
-    @Operation(summary = "결재 상신함 문서 목록", description = "상신 문서리스트", tags = {"ApprovalController"})
+    @Operation(summary = "결재 상신함 문서 목록", description = "문서 리스트", tags = {"ApprovalController"})
     @GetMapping("/approval")
     public ResponseEntity<ResponseDTO> getApprovalList(@RequestParam String memCode,
-                                                       @RequestParam(name = "offset", defaultValue = "1") String offset) {
-        int total = approvalService.getApprovalList(memCode);
+                                                       @RequestParam(name = "offset", defaultValue = "1") String offset,
+                                                       @RequestParam String pageType) {
+        int total = approvalService.getApprovalList(memCode, pageType);
 
         CriteriaAP cri = new CriteriaAP(Integer.valueOf(offset), 8);
         PagingResponseDTOAP pagingResponseDTOAP = new PagingResponseDTOAP();
-        List<ApprovalDTO> approvalDTOList = approvalService.getApprovalList(memCode, cri);
+        List<ApprovalDTO> approvalDTOList = approvalService.getApprovalList(memCode, cri, pageType);
         pagingResponseDTOAP.setData(approvalDTOList);
         pagingResponseDTOAP.setPageInfo(new PageDTOAP(total, cri));
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTOAP));
     }
 
-    @Operation(summary = "결재대상 정보 조회", description = "업무 상신 결재대상 정보 조회", tags = { "ApprovalController" })
+    @Operation(summary = "결재대상 정보 조회", description = "결재대상 정보 조회", tags = { "ApprovalController" })
     @GetMapping("/approval/searchInfo")
     public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue)));
