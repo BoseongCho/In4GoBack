@@ -13,10 +13,10 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     Member findByMemCode(String memCode);
 
 //    @EntityGraph(value = "ApprovalMem.fetchAll", type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT DISTINCT m FROM ApprovalMem m WHERE m.memName LIKE concat('%', concat(:inputValue, '%'))")
-    List<ApprovalMem> getSearchInfoByName(String inputValue);
+    @Query("SELECT DISTINCT m FROM ApprovalMem m WHERE m.memName LIKE concat('%', concat(:inputValue, '%')) AND m.memCode != :memCode")
+    List<ApprovalMem> getSearchInfoByName(String inputValue, String memCode);
 
     @EntityGraph(value = "ApprovalMem.fetchAll", type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT m FROM ApprovalMem m WHERE m.positionCode.positionName LIKE concat('%', concat(:inputValue, '%'))")
-    List<ApprovalMem> getSearchInfoByPosition(String inputValue);
+    @Query("SELECT m FROM ApprovalMem m WHERE m.positionCode.positionName LIKE concat('%', concat(:inputValue, '%')) AND m.memCode != :memCode")
+    List<ApprovalMem> getSearchInfoByPosition(String inputValue, String memCode);
 }
