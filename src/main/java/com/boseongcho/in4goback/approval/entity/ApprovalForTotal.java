@@ -22,4 +22,7 @@ public class ApprovalForTotal {
     @Column(name = "MEM_CODE")
     private String memCode;
 
+    @Column(name = "DOC_TYPE")
+    private String docType;
+
 }

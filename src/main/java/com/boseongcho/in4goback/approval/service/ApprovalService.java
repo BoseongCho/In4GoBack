@@ -49,7 +49,7 @@ public class ApprovalService {
     @PersistenceContext
     EntityManager em;
 
-    public int getApprovalList(String memCode, String pageType) {
+    public int getApprovalList(String memCode, String pageType, String docType) {
         /* total을 구하기 위한 메소드 */
         /* ApproverList에 값이 많이 담기면 entitygraph 차이를 시험해 볼 것 */
 //        List<Approval> result2 = approvalRepository.getApprovalList(memCode);
@@ -61,55 +61,92 @@ public class ApprovalService {
 //        }
         int result;
 //
-        switch (pageType) {
-            case "submit":
-                result = approvalRepository.getSubmitList(memCode).size();
-                break;
-            case "bookmark":
-                result = approvalRepository.getBookmarkList(memCode).size();
-                break;
-            case "referred":
-                result = approvalRepository.getReferredList(memCode).size();
-                break;
-            case "approver":
-                result = approvalRepository.getApproverList(memCode).size();
-                break;
-            default:
-                result = 0; // 예외처리 필요
+        if (docType.equals("종류")) {
+
+            switch (pageType) {
+                case "submit":
+                    result = approvalRepository.getSubmitList(memCode).size();
+                    break;
+                case "bookmark":
+                    result = approvalRepository.getBookmarkList(memCode).size();
+                    break;
+                case "referred":
+                    result = approvalRepository.getReferredList(memCode).size();
+                    break;
+                case "approver":
+                    result = approvalRepository.getApproverList(memCode).size();
+                    break;
+                default:
+                    result = 0; // 예외처리 필요
+            }
+        } else {
+            switch (pageType) {
+                case "submit":
+                    result = approvalRepository.getSubmitList(memCode, docType).size();
+                    break;
+                case "referred":
+                    result = approvalRepository.getReferredList(memCode, docType).size();
+                    break;
+                case "approver":
+                    result = approvalRepository.getApproverList(memCode, docType).size();
+                    break;
+                default:
+                    result = 0; // 예외처리 필요
+            }
         }
+
 
         return result;
     }
 
     @Transactional
-    public List<ApprovalDTO> getApprovalList(String memCode, CriteriaAP cri, String pageType) {
+    public List<ApprovalDTO> getApprovalList(String memCode, CriteriaAP cri, String pageType, String docType) {
 
         int index = cri.getPageNum() - 1;
         int count = cri.getAmount();
         Pageable paging = PageRequest.of(index, count, Sort.by("docCode").descending());
         Page<Approval> result;
         System.out.println("pageType : " + pageType);
+        System.out.println("docType : " + docType);
 
-        switch (pageType) {
-            case "submit":
-                result = approvalRepository.getSubmitList(memCode, paging);
-                break;
-            case "bookmark":
-                result = approvalRepository.getBookmarkList(memCode, paging);
-                break;
-            case "referred":
-                result = approvalRepository.getReferredList(memCode, paging);
-                break;
-            case "approver":
-                result = approvalRepository.getApproverList(memCode, paging);
-                break;
-            default:
-                result = null; // 예외처리 필요
+        if(docType.equals("종류")){
+            switch (pageType) {
+                case "submit":
+                    result = approvalRepository.getSubmitList(memCode, paging);
+                    break;
+                case "bookmark":
+                    result = approvalRepository.getBookmarkList(memCode, paging);
+                    break;
+                case "referred":
+                    result = approvalRepository.getReferredList(memCode, paging);
+                    break;
+                case "approver":
+                    result = approvalRepository.getApproverList(memCode, paging);
+                    break;
+                default:
+                    result = null; // 예외처리 필요
+            }
+        } else {
+            switch (pageType) {
+                case "submit":
+                    result = approvalRepository.getSubmitList(memCode, paging, docType);
+                    break;
+                case "referred":
+                    result = approvalRepository.getReferredList(memCode, paging, docType);
+                    break;
+                case "approver":
+                    result = approvalRepository.getApproverList(memCode, paging, docType);
+                    break;
+                default:
+                    result = null; // 예외처리 필요
+            }
         }
+
+
         List<Approval> approvalList = result.getContent();
 
         if (pageType.equals("bookmark")) {
-            
+
             nextDoc:
             for (int i = 0; i < approvalList.size(); i++) {
                 Approval a = approvalList.get(i);
