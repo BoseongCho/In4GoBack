@@ -29,12 +29,12 @@ public class ApprovalController {
     @GetMapping("/approval")
     public ResponseEntity<ResponseDTO> getApprovalList(@RequestParam String memCode,
                                                        @RequestParam(name = "offset", defaultValue = "1") String offset,
-                                                       @RequestParam String pageType) {
-        int total = approvalService.getApprovalList(memCode, pageType);
+                                                       @RequestParam String pageType, @RequestParam String docType) {
+        int total = approvalService.getApprovalList(memCode, pageType, docType);
 
         CriteriaAP cri = new CriteriaAP(Integer.valueOf(offset), 8);
         PagingResponseDTOAP pagingResponseDTOAP = new PagingResponseDTOAP();
-        List<ApprovalDTO> approvalDTOList = approvalService.getApprovalList(memCode, cri, pageType);
+        List<ApprovalDTO> approvalDTOList = approvalService.getApprovalList(memCode, cri, pageType, docType);
         pagingResponseDTOAP.setData(approvalDTOList);
         pagingResponseDTOAP.setPageInfo(new PageDTOAP(total, cri));
 
@@ -86,4 +86,5 @@ public class ApprovalController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "삭제 성공", approvalService.deleteApprovalBookmark(bookmarkDTO)));
     }
+
 }

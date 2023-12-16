@@ -35,6 +35,28 @@ public interface ApprovalRepository extends JpaRepository<Approval, String> {
     @Query("SELECT a FROM Approval a JOIN Referee r ON(a.docCode = r.docCode) WHERE r.memCode = ?1")
     Page<Approval> getReferredList(String memCode, Pageable paging);
 
+    ///////////////////////////////////////////////
+
+    @Query("SELECT a FROM ApprovalForTotal a WHERE a.memCode = ?1 AND a.docType = ?2")
+    List<ApprovalForTotal> getSubmitList(String memCode, String docType);
+    //    @EntityGraph(value = "Approval.fetchAll", type = EntityGraph.EntityGraphType.LOAD)
+    @Query("SELECT a FROM Approval a where a.approvalMem.memCode = ?1 AND a.docType = ?2")
+    Page<Approval> getSubmitList(String memCode, Pageable paging, String docType);
+
+    @Query("SELECT a FROM ApprovalForTotal a JOIN Approver v ON(a.docCode = v.docCode) WHERE v.memCode = ?1 AND a.docType = ?2")
+    List<ApprovalForTotal> getApproverList(String memCode, String docType);
+    @Query("SELECT a FROM Approval a JOIN Approver v ON(a.docCode = v.docCode) WHERE v.memCode = ?1 AND a.docType = ?2")
+    Page<Approval> getApproverList(String memCode, Pageable paging, String docType);
+
+    @Query("SELECT a FROM ApprovalForTotal a JOIN Referee r ON(a.docCode = r.docCode) WHERE r.memCode = ?1 AND a.docType = ?2")
+    List<ApprovalForTotal> getReferredList(String memCode, String docType);
+
+    @Query("SELECT a FROM Approval a JOIN Referee r ON(a.docCode = r.docCode) WHERE r.memCode = ?1 AND a.docType = ?2")
+    Page<Approval> getReferredList(String memCode, Pageable paging, String docType);
+
+
+    /////////////////
+
 
     @Query("SELECT a FROM Approval a WHERE a.approvalMem.memCode = :memCode" +
             " AND to_char(a.reportDate, 'YYYY-MM-DD') BETWEEN :startDate AND :endDate ORDER BY a.reportDate desc ")
