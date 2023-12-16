@@ -109,26 +109,22 @@ public class ApprovalService {
         List<Approval> approvalList = result.getContent();
 
         if (pageType.equals("bookmark")) {
-            System.out.println("여까지왓니 ? ? ?");
-            System.out.println("approvalList.size() : " + approvalList.size());
-
+            
             nextDoc:
             for (int i = 0; i < approvalList.size(); i++) {
                 Approval a = approvalList.get(i);
-                if (memCode.equals(a.getApprovalMem().getMemCode())) a.setTypeToMe("submit");
+                if (memCode.equals(a.getApprovalMem().getMemCode())) a.setTypeToMe("상신");
                 else {
                     for (int j = 0; j < a.getRefereeList().size(); j++) {
                         if (memCode.equals(a.getRefereeList().get(j).getMemCode())) {
-                            a.setTypeToMe("referred");
-                            System.out.println("continue 되기 전 i 값 : "  + i);
+                            a.setTypeToMe("참조");
                             continue nextDoc;
                         }
                     }
                     for (int j = 0; j < a.getApproverList().size(); j++) {
-                        System.out.println("continue 된 후 i 값 : "  + i);
 
                         if (memCode.equals(a.getApproverList().get(j).getMemCode())) {
-                            a.setTypeToMe("approver");
+                            a.setTypeToMe("결재");
                             continue nextDoc;
                         }
                     }
@@ -145,14 +141,14 @@ public class ApprovalService {
         return approvalList.stream().map(approval -> modelMapper.map(approval, ApprovalDTO.class)).collect(Collectors.toList());
     }
 
-    public Object getSearchInfoAPI(String nameOrPosition, String inputValue) {
+    public Object getSearchInfoAPI(String nameOrPosition, String inputValue, String memCode) {
         log.info("[ApprovalService] getSearchInfoAPI Start =============== ");
 
         List<ApprovalMem> foundMembers = null;
         if (nameOrPosition.equals("이름")) {
-            foundMembers = memberRepository.getSearchInfoByName(inputValue);
+            foundMembers = memberRepository.getSearchInfoByName(inputValue, memCode);
         } else if (nameOrPosition.equals("직급")) {
-            foundMembers = memberRepository.getSearchInfoByPosition(inputValue);
+            foundMembers = memberRepository.getSearchInfoByPosition(inputValue, memCode);
             System.out.println("foundmembers : " + foundMembers);
         }
 

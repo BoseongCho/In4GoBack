@@ -43,8 +43,9 @@ public class ApprovalController {
 
     @Operation(summary = "결재대상 정보 조회", description = "결재대상 정보 조회", tags = { "ApprovalController" })
     @GetMapping("/approval/searchInfo")
-    public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue)));
+    public ResponseEntity<ResponseDTO> getSearchInfoAPI(@RequestParam String nameOrPosition, @RequestParam String inputValue,
+                                                        @RequestParam String memCode){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", approvalService.getSearchInfoAPI(nameOrPosition, inputValue, memCode)));
     }
 
     @Operation(summary = "결재 문서 상신", description = "결재 문서 상신", tags = { "ApprovalController" })
