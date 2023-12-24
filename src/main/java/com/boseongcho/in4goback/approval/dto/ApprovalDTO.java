@@ -29,5 +29,4 @@ public class ApprovalDTO {
     private String title; //제목
     private BookmarkDTO bookmark; //
     private List<DocAttachmentDTO> docAttachmentList; // 결재_첨부파일
-
 }
