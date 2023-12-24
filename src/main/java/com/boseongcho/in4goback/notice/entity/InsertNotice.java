@@ -1,6 +1,5 @@
 package com.boseongcho.in4goback.notice.entity;
 
-
 import com.boseongcho.in4goback.approval.entity.DocAttachment;
 import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
@@ -11,21 +10,27 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@ToString
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-public class Notice {
+@ToString
+@Table(name = "NOTICE")
+@DynamicInsert
+@Entity
+public class InsertNotice {
 
     @Id
     @Column(name = "NOTICE_NO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_NOTICE_CODE")
+    @GenericGenerator(name = "SEQ_NOTICE_CODE", strategy = "com.boseongcho.in4goback.common.StringPrefixSequenceGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixSequenceGenerator.VALUE_PREFIX_PARAMETER, value= "NOTICE_")
+            })
     private String noticeNo;
 
-    @OneToOne
-    @JoinColumn(name = "MEM_CODE")
-    private NoticeMem noticeMem;
+    @Column(name = "MEM_CODE")
+    private String memCode;
 
     @Column(name = "TITLE")
     private String title; //제목
@@ -45,5 +50,4 @@ public class Notice {
     @OneToMany
     @JoinColumn(name = "DOC_CODE")
     private List<DocAttachment> docAttachmentList; // 공지_첨부파일
-
 }

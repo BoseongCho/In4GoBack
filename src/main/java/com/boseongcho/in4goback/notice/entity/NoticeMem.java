@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.approval.entity;
+package com.boseongcho.in4goback.notice.entity;
 
 
 import com.boseongcho.in4goback.deptandteam.entity.Department;
@@ -14,11 +14,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "MEMBER")
-@NamedEntityGraph(name = "ApprovalMem.fetchAll", attributeNodes = {
+@NamedEntityGraph(name = "NoticeMem.fetchAll", attributeNodes = {
         @NamedAttributeNode("departmentCode"),
         @NamedAttributeNode("positionCode"),
 })
-public class ApprovalMem {
+public class NoticeMem {
 
     @Id
     @Column(name = "MEM_CODE")
