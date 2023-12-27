@@ -1,5 +1,6 @@
 package com.boseongcho.in4goback.notice.service;
 
+import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
 import com.boseongcho.in4goback.approval.service.ApprovalService;
 import com.boseongcho.in4goback.notice.dto.InsertNoticeDTO;
 import com.boseongcho.in4goback.notice.dto.NoticeDTO;
@@ -11,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -45,5 +49,19 @@ public class NoticeService {
             result = 1;
 
         return (result > 0) ? noticeNo : "실패";
+    }
+
+    public Object getNoticeList() {
+        log.info("[NoticeService] getNoticeList Start =============== ");
+        List<Notice> noticeList = noticeRepository.getNotice();
+
+        return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
+
+    }
+
+    public Object getNoticeDetail(String no) {
+        Notice notice = noticeRepository.getNoticeDetail(no);
+
+        return modelMapper.map(notice, NoticeDTO.class);
     }
 }
