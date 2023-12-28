@@ -17,7 +17,7 @@ public class NoticeDTO {
     private NoticeMemDTO noticeMem; // memCode FK+PK 상신인
     private String title; //제목
     private String content; //내용
-    private Date writeDate; //작성일
+    private String writeDate; //작성일
     private int readCount; // 조회수
     private int isPinned; // 상단고정 0,1
     private List<DocAttachmentDTO> docAttachmentList; // 공지_첨부파일

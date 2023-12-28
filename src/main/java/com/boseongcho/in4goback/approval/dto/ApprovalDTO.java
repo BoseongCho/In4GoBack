@@ -19,7 +19,7 @@ public class ApprovalDTO {
     private String docType;  // 결재종류(ex:업무, 근태)
     private String isApproved; // W/Y/N
     private String content; //내용
-    private Date reportDate; //작성일
+    private String reportDate; //작성일
 
     private List<ApproverDTO> approverList; // 결재자 리스트
     private List<RefereeDTO> refereeList; // 참조인 리스트

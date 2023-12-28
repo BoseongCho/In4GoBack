@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,7 @@ public class NoticeService {
     private final ModelMapper modelMapper;
 
 
+    @Transactional
     public Object insertNotice(InsertNoticeDTO insertNoticeDTO) {
 
         System.out.println("Notice ====== insertNoticeDTO = " + insertNoticeDTO);
@@ -32,31 +34,21 @@ public class NoticeService {
         int result = 0;
         String noticeNo = "";
 
-//        try{
-//
-//            Notice notice = modelMapper.map(noticeDTO, Notice.class);
-//
-//            noticeRepository.save(notice);
-//            noticeNo = notice.getNoticeNo();
-//            result = 1;
-//        } catch(Exception e){
-//            log.info("[Notice insert] Failed!!");
-//        }
+        try{
             InsertNotice insertNotice = modelMapper.map(insertNoticeDTO, InsertNotice.class);
-
             noticeRepository.save(insertNotice);
             noticeNo = insertNotice.getNoticeNo();
             result = 1;
-
+        } catch(Exception e){
+            log.info("[Notice insert] Failed!!");
+        }
         return (result > 0) ? noticeNo : "실패";
     }
 
     public Object getNoticeList() {
         log.info("[NoticeService] getNoticeList Start =============== ");
         List<Notice> noticeList = noticeRepository.getNotice();
-
         return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
-
     }
 
     public Object getNoticeDetail(String no) {

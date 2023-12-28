@@ -40,7 +40,7 @@ public class Approval {
     private String content; //내용
 
     @Column(name ="reportDate")
-    private Date reportDate; //작성일
+    private String reportDate; //작성일
 
     @OneToMany
     @JoinColumn(name = "DOC_CODE")

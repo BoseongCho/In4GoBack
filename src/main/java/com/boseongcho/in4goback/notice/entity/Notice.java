@@ -34,7 +34,7 @@ public class Notice {
     private String content; //내용
 
     @Column(name ="WRITE_DATE")
-    private Date writeDate; //작성일
+    private String writeDate; //작성일
 
     @Column(name = "READ_COUNT")
     private int readCount; // 조회수

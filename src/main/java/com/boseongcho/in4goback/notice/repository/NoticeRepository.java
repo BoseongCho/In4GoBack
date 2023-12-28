@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface NoticeRepository extends JpaRepository<InsertNotice, String> {
 
-    @Query("SELECT n FROM Notice n ORDER BY n.isPinned DESC ")
+    @Query("SELECT n FROM Notice n ORDER BY n.isPinned DESC, n.writeDate DESC ")
     List<Notice> getNotice();
 
     @Query("SELECT n FROM Notice n WHERE n.noticeNo = :no")
