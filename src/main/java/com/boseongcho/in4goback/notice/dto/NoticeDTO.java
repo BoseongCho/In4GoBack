@@ -21,5 +21,4 @@ public class NoticeDTO {
     private int readCount; // 조회수
     private int isPinned; // 상단고정 0,1
     private List<DocAttachmentDTO> docAttachmentList; // 공지_첨부파일
-
 }

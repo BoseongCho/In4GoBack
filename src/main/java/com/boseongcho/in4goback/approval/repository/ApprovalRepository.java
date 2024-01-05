@@ -54,10 +54,6 @@ public interface ApprovalRepository extends JpaRepository<Approval, String> {
     @Query("SELECT a FROM Approval a JOIN Referee r ON(a.docCode = r.docCode) WHERE r.memCode = ?1 AND a.docType = ?2")
     Page<Approval> getReferredList(String memCode, Pageable paging, String docType);
 
-
-    /////////////////
-
-
     @Query("SELECT a FROM Approval a WHERE a.approvalMem.memCode = :memCode" +
             " AND to_char(a.reportDate, 'YYYY-MM-DD') BETWEEN :startDate AND :endDate ORDER BY a.reportDate desc ")
     List<Approval> getSearchApproval(String memCode, String startDate, String endDate);
