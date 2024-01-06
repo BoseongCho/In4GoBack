@@ -74,13 +74,13 @@ public class NoticeService {
         System.out.println(obj[2]);
 
         List<Notice> noticeList = noticeRepository.getNoticeDetail(no, (String)obj[1], (String)obj[2]);
+        System.out.println("noticeList : " + noticeList);
         if(noticeList.size() == 2){
             // 이전 글이 없는 경우
-            if(noticeList.get(0).getNoticeNo().equals(no)) noticeList.set(0, noticeList.get(1));
+            if(noticeList.get(0).getNoticeNo().equals(no)) noticeList.add(0, noticeList.get(0));
             // 다음 글이 없는 경우
             else noticeList.add(noticeList.get(1));
         }
-        System.out.println("noticeList : " + noticeList);
 
         return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
     }

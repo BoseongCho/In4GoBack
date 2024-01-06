@@ -12,6 +12,6 @@ public interface NoticeRepository extends JpaRepository<InsertNotice, String> {
     @Query("SELECT n FROM Notice n ORDER BY n.isPinned DESC, n.writeDate DESC ")
     List<Notice> getNotice();
 
-    @Query("SELECT n FROM Notice n WHERE n.noticeNo IN (:no,:no2, :no3)")
+    @Query("SELECT n FROM Notice n WHERE n.noticeNo IN (:no,:no2, :no3) ORDER BY n.noticeNo")
     List<Notice> getNoticeDetail(String no, String no2, String no3);
 }
