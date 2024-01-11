@@ -5,6 +5,7 @@ import com.boseongcho.in4goback.approval.entity.DocAttachment;
 import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,7 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@DynamicUpdate
 public class Notice {
+    /* ReadCount를 update하려면 영속성에서 관리되는 엔티티를 set을 통해 update해야하는데,
+    DynamicUpdate를 설정하지 않으면 모든 필드변수가 함께 업데이트가 되기 때문에
+    toString이 되지 않은 writeDate를 읽어오지 못해서
+    리터럴이 형식 문자열과 일치하지 않음 에러가 발생하니 주의.
+    * */
 
     @Id
     @Column(name = "NOTICE_NO")
@@ -35,8 +42,7 @@ public class Notice {
 
     @Column(name ="WRITE_DATE")
     private String writeDate; //작성일
-
-    @Column(name = "READ_COUNT")
+    @Column(name = "READ_COUNT", columnDefinition = "NUMBER")
     private int readCount; // 조회수
 
     @Column(name = "IS_PINNED")

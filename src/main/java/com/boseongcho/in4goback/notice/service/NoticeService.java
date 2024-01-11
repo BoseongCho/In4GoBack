@@ -56,6 +56,7 @@ public class NoticeService {
         return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
     }
 
+    @Transactional
     public Object getNoticeDetail(String no) {
         System.out.println("no : " + no);
         // 게시판 detail 이전 글, 다음 게시글 ID를 가져오는 Query
@@ -81,6 +82,8 @@ public class NoticeService {
             // 다음 글이 없는 경우
             else noticeList.add(noticeList.get(1));
         }
+
+        noticeList.get(1).setReadCount(noticeList.get(1).getReadCount()+1);
 
         return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
     }
