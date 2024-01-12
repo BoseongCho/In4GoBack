@@ -61,7 +61,7 @@ public class ApprovalController {
     public ResponseEntity<ResponseDTO> insertApprovalDoc(@RequestParam("file")List<MultipartFile> docAttachments
             , @RequestParam String docCode){
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제문서 상신 완료", approvalService.insertApprovalDoc(docAttachments, docCode)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "첨부파일 추가 완료", approvalService.insertApprovalDoc(docAttachments, docCode)));
     }
 
     @Operation(summary = "상신함 날짜로 검색", description = "상신함 날짜로 검색", tags = { "ApprovalController" })

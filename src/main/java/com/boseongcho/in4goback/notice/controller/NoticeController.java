@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -42,5 +43,15 @@ public class NoticeController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", noticeService.getNoticeDetail(no)));
     }
+
+    @Operation(summary = "공지사항 첨부파일 추가", description = "공지사항 첨부파일 추가", tags = { "NoticeController" })
+    @PostMapping(value = "/approval/insertDoc")
+    public ResponseEntity<ResponseDTO> insertNoticeDoc(@RequestParam("file")List<MultipartFile> docAttachments
+            , @RequestParam String NoticeNo){
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "첨부파일 추가   완료", noticeService.insertNoticeDoc(docAttachments, NoticeNo)));
+    }
+
+
 }
 

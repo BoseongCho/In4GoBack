@@ -1,4 +1,4 @@
-package com.boseongcho.in4goback.approval.dto;
+package com.boseongcho.in4goback.notice.dto;
 
 import lombok.*;
 
@@ -7,11 +7,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DocAttachmentDTO {
+public class NoticeFileDTO {
 
-    private int attachNo; // 시퀀스
+    private int fileNo; // 시퀀스
 
-    private String docCode;
+    private String noticeNo;
 
     private String fileName; // 파일이름
 

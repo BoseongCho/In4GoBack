@@ -250,7 +250,6 @@ public class ApprovalService {
         String savedName = null; // 실제 저장될 이름(+. 확장자 포함)
         int result = 0;
 
-
         try {
             for (MultipartFile file : docAttachments) {
 
