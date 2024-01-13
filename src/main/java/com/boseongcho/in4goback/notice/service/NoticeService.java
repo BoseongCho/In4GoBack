@@ -97,14 +97,14 @@ public class NoticeService {
         return noticeList.stream().map(notice -> modelMapper.map(notice, NoticeDTO.class)).collect(Collectors.toList());
     }
 
-    public Object insertNoticeDoc(List<MultipartFile> docAttachments, String noticeNo) {
-        System.out.println("Service ====== insertNoticeDoc = " + docAttachments);
+    public Object insertNoticeDoc(List<MultipartFile> files, String noticeNo) {
+        System.out.println("Service ====== insertNoticeDoc = " + files);
         List<NoticeFile> noticeFileList = new ArrayList<>();
         String DOC_URL = "src/main/resources/static/noticeFiles";
         String savedName = null; // 실제 저장될 이름(+. 확장자 포함)
         int result = 0;
         try {
-            for(MultipartFile file : docAttachments){
+            for(MultipartFile file : files){
 
                 String fileName = UUID.randomUUID().toString().replace("-", "");
                 savedName = FileUploadUtils.saveFile(DOC_URL, fileName, file);
@@ -118,8 +118,6 @@ public class NoticeService {
                 noticeFileList.add(noticeFile);
             }
             noticeFileRepository.saveAll(noticeFileList);
-            System.out.println("noticeFileList = " + noticeFileList);
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);

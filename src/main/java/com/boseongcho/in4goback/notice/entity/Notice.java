@@ -49,7 +49,7 @@ public class Notice {
     private int isPinned; // 상단고정 0,1
 
     @OneToMany
-    @JoinColumn(name = "DOC_CODE")
-    private List<DocAttachment> docAttachmentList; // 공지_첨부파일
+    @JoinColumn(name = "NOTICE_NO")
+    private List<NoticeFile> noticeFileList; // 공지_첨부파일
 
 }
