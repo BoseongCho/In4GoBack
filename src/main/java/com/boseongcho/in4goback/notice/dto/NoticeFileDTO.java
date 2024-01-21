@@ -1,6 +1,7 @@
 package com.boseongcho.in4goback.notice.dto;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 @Getter
 @Setter
@@ -16,4 +17,6 @@ public class NoticeFileDTO {
     private String fileName; // 파일이름
 
     private String url; // 파일주소
+
+    private String fileSize; // 파일 사이즈
 }

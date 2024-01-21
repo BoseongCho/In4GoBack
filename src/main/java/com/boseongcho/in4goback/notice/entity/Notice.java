@@ -1,15 +1,10 @@
 package com.boseongcho.in4goback.notice.entity;
 
 
-import com.boseongcho.in4goback.approval.entity.DocAttachment;
-import com.boseongcho.in4goback.common.StringPrefixSequenceGenerator;
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity

@@ -1,9 +1,7 @@
 package com.boseongcho.in4goback.notice.service;
 
-import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
-import com.boseongcho.in4goback.approval.entity.DocAttachment;
-import com.boseongcho.in4goback.approval.repository.DocAttachmentRepository;
 import com.boseongcho.in4goback.approval.service.ApprovalService;
+import com.boseongcho.in4goback.common.ConvertBytes;
 import com.boseongcho.in4goback.notice.dto.InsertNoticeDTO;
 import com.boseongcho.in4goback.notice.dto.NoticeDTO;
 import com.boseongcho.in4goback.notice.entity.InsertNotice;
@@ -36,6 +34,7 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
     private final ModelMapper modelMapper;
     private final NoticeFileRepository noticeFileRepository;
+    private final ConvertBytes convertBytes;
 
     @PersistenceContext
     EntityManager em;
@@ -110,11 +109,17 @@ public class NoticeService {
                 savedName = FileUploadUtils.saveFile(DOC_URL, fileName, file);
                 savedName = "/noticeFiles/" + savedName;
 
+
                 NoticeFile noticeFile = new NoticeFile();
                 noticeFile.setUrl(savedName); // 저장경로 + 저장이름(+.확장자)
                 noticeFile.setNoticeNo(noticeNo);
                 noticeFile.setFileName(file.getOriginalFilename()); // 찐이름
 
+                if(file.getSize() >= 1024*1024){
+                    noticeFile.setFileSize(convertBytes.bytesToMegabytes(file.getSize()));
+                } else noticeFile.setFileSize(convertBytes.bytesToKilobytes(file.getSize()));
+
+                System.out.println("noticeFile : " + noticeFile);
                 noticeFileList.add(noticeFile);
             }
             noticeFileRepository.saveAll(noticeFileList);

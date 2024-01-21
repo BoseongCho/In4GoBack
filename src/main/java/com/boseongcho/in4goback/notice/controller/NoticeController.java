@@ -1,9 +1,5 @@
 package com.boseongcho.in4goback.notice.controller;
 
-import com.boseongcho.in4goback.approval.dto.ApprovalDTO;
-import com.boseongcho.in4goback.approval.paging.CriteriaAP;
-import com.boseongcho.in4goback.approval.paging.PageDTOAP;
-import com.boseongcho.in4goback.approval.paging.PagingResponseDTOAP;
 import com.boseongcho.in4goback.common.ResponseDTO;
 import com.boseongcho.in4goback.notice.dto.InsertNoticeDTO;
 import com.boseongcho.in4goback.notice.service.NoticeService;

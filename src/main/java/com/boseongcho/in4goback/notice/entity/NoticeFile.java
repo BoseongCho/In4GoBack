@@ -3,8 +3,10 @@ package com.boseongcho.in4goback.notice.entity;
 
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Getter
 @Setter
@@ -30,4 +32,7 @@ public class NoticeFile {
 
     @Column(name = "URL")
     private String url; // 파일주소
+
+    @Column(name = "FILE_SIZE")
+    private String fileSize; // 파일 사이즈
 }

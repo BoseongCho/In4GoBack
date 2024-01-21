@@ -37,7 +37,6 @@ public class ApprovalController {
         List<ApprovalDTO> approvalDTOList = approvalService.getApprovalList(memCode, cri, pageType, docType);
         pagingResponseDTOAP.setData(approvalDTOList);
         pagingResponseDTOAP.setPageInfo(new PageDTOAP(total, cri));
-
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", pagingResponseDTOAP));
     }
 
