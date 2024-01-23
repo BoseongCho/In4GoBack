@@ -5,11 +5,19 @@ import com.boseongcho.in4goback.notice.dto.InsertNoticeDTO;
 import com.boseongcho.in4goback.notice.service.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -48,5 +56,18 @@ public class NoticeController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "첨부파일 추가   완료", noticeService.insertNoticeDoc(files, noticeNo)));
     }
+    @Operation(summary = "공지사항 첨부파일 다운로드", description = "공지사항 첨부파일 다운로드", tags = { "NoticeController" })
+    @GetMapping("/notice/download")
+    public ResponseEntity<Resource> downloadNoticeFile(@RequestParam String url) throws IOException{
+        System.out.println(url);
+        Path filePath = Paths.get(url);
+        Resource resource = new InputStreamResource(Files.newInputStream(filePath));
+        System.out.println("filePath : " + filePath);
+
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+              .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filenam=\"" + filePath.getFileName() + "\"")
+                .body(resource);
+    }
+
 }
 
